@@ -4,24 +4,6 @@ This readme provides an overview of a Spring Boot application that includes four
 ## Entity Relationship Diagram(ERD)
 ![mermaid-diagram-2023-09-25-122902](https://github.com/elsayedzahran/HospitalManagementCrud/assets/68614758/7f01ef9b-d16f-49a0-944f-f61c6532ce2c)
 
-## Entities
-
-### Hospital
-- Represents a hospital entity.
-- Contains properties such as id, name, address, etc.
-
-### Doctor
-- Represents a doctor entity.
-- Contains properties such as id, name, specialization, etc.
-
-### Drug
-- Represents a drug entity.
-- Contains properties such as id, name, description, etc.
-
-### Patient
-- Represents a patient entity.
-- Contains properties such as id, name, gender, etc.
-
 ## Controllers
 
 ### HospitalController
@@ -29,23 +11,22 @@ This readme provides an overview of a Spring Boot application that includes four
 - Base URL: /hospitals
 
 #### Endpoints:
-- GET /list: Retrieves a list of all hospitals.
+- GET /: Retrieves a list of all hospitals.
 - GET /{id}: Retrieves a specific hospital by ID.
 - POST /add: Adds a new hospital.
-- POST /delete/{id}: Deletes a hospital with the specified ID.
-- POST /update/{id}: Updates a hospital with the specified ID.
-- GET /search?name={name}: Searches for hospitals by name.
+- DELETE /{id}: Deletes a hospital with the specified ID.
+- PUT /{id}: Updates a hospital with the specified ID.
 
 ### DoctorController
 - REST controller for managing doctors.
 - Base URL: /doctors
 
 #### Endpoints:
-- GET /list: Retrieves a list of all doctors.
+- GET /: Retrieves a list of all doctors.
 - GET /{id}: Retrieves a specific doctor by ID.
-- POST /add: Adds a new doctor.
-- POST /delete/{id}: Deletes a doctor with the specified ID.
-- POST /update/{id}: Updates a doctor with the specified ID.
+- POST /: Adds a new doctor.
+- DELETE /{id}: Deletes a doctor with the specified ID.
+- PUT /{id}: Updates a doctor with the specified ID.
 
 ### PatientController
 - REST controller for managing patients.

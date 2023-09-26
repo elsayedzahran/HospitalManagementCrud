@@ -33,22 +33,22 @@ This readme provides an overview of a Spring Boot application that includes four
 - Base URL: /patients
 
 #### Endpoints:
-- GET /list: Retrieves a list of all patients.
+- GET /: Retrieves a list of all patients.
 - GET /{id}: Retrieves a specific patient by ID.
-- POST /add: Adds a new patient.
-- POST /delete/{id}: Deletes a patient with the specified ID.
-- POST /update/{id}: Updates a patient with the specified ID.
+- POST /: Adds a new patient.
+- DELETE /{id}: Deletes a patient with the specified ID.
+- PUT /{id}: Updates a patient with the specified ID.
 
 ### DrugController
 - REST controller for managing drugs.
 - Base URL: /drugs
 
 #### Endpoints:
-- GET /list: Retrieves a list of all drugs.
+- GET /: Retrieves a list of all drugs.
 - GET /{id}: Retrieves a specific drug by ID.
-- POST /add: Adds a new drug.
-- POST /delete/{id}: Deletes a drug with the specified ID.
-- POST /update/{id}: Updates a drug with the specified ID.
+- POST /: Adds a new drug.
+- DELETE /{id}: Deletes a drug with the specified ID.
+- PUT /{id}: Updates a drug with the specified ID.
 
 ## Dependencies
 

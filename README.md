@@ -52,7 +52,6 @@ This readme provides an overview of a Spring Boot application that includes four
 - POST /add: Adds a new doctor.
 - POST /delete/{id}: Deletes a doctor with the specified ID.
 - POST /update/{id}: Updates a doctor with the specified ID.
-- GET /search?name={name}: Searches for doctors by name.
 
 ### PatientController
 - REST controller for managing patients.
@@ -64,7 +63,6 @@ This readme provides an overview of a Spring Boot application that includes four
 - POST /add: Adds a new patient.
 - POST /delete/{id}: Deletes a patient with the specified ID.
 - POST /update/{id}: Updates a patient with the specified ID.
-- GET /search?name={name}: Searches for patients by name.
 
 ### DrugController
 - REST controller for managing drugs.

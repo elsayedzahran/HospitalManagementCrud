@@ -2,7 +2,7 @@
 repo to try crud operations on hospital management system.
 # Spring Boot Application Readme
 
-This readme provides an overview of a Spring Boot application that includes four entities: Hospital, Doctor, Drug, and Patient. The application provides RESTful APIs to manage these entities through corresponding controllers. The application is built using JDK 20 and can be deployed in a Docker container.
+This readme provides an overview of a Spring Boot application that includes four entities: Hospital, Doctor, Drug, and Patient. The application provides RESTful APIs to manage these entities through corresponding controllers. The application is built using JDK 17 and can be deployed in a Docker container.
 
 ## Entity Relationship Diagram(ERD)
 ![mermaid-diagram-2023-09-25-122902](https://github.com/elsayedzahran/HospitalManagementCrud/assets/68614758/7f01ef9b-d16f-49a0-944f-f61c6532ce2c)

@@ -6,9 +6,9 @@ import com.example.springexcercise.model.HospitalModel;
 import java.util.List;
 
 public interface HospitalService {
-    List<Hospital> getAllHospitals();
-    Hospital getHospitalById(int id);
-    Hospital addHospital(HospitalModel hospitalModel);
-    Hospital updateHospital(int hospitalId, HospitalModel hospitalModel);
+    List<HospitalModel> getAllHospitals();
+    HospitalModel getHospitalById(int id);
+    HospitalModel addHospital(HospitalModel hospitalModel);
+    HospitalModel updateHospital(int hospitalId, HospitalModel hospitalModel);
     void deleteHospital(int id);
 }

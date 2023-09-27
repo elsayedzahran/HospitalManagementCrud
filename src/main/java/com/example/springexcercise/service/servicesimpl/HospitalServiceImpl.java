@@ -22,28 +22,31 @@ public class HospitalServiceImpl implements HospitalService {
     HospitalRepo hospitalRepo;
 
     @Override
-    public List<Hospital> getAllHospitals() {
-        return hospitalRepo.findAll();
+    public List<HospitalModel> getAllHospitals() {
+        return hospitalRepo.findAll()
+                .stream()
+                .map(hospital -> hospitalMapper.toModel(hospital))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Hospital getHospitalById(int id) {
-        return hospitalRepo.findById(id).orElseThrow();
+    public HospitalModel getHospitalById(int id) {
+        return hospitalMapper.toModel(hospitalRepo.findById(id).orElseThrow());
     }
 
     @Override
-    public Hospital addHospital(HospitalModel hospitalModel) {
+    public HospitalModel addHospital(HospitalModel hospitalModel) {
         Hospital hospital = hospitalMapper.toEntity(hospitalModel);
         hospitalRepo.save(hospital);
-        return hospital;
+        return hospitalModel;
     }
     @Override
-    public Hospital updateHospital(int hospitalId, HospitalModel hospitalModel) {
+    public HospitalModel updateHospital(int hospitalId, HospitalModel hospitalModel) {
         Hospital hospital = hospitalRepo.findById(hospitalId).orElseThrow();
         hospital.setName(hospitalModel.getName());
         hospital.setAddress(hospitalModel.getAddress());
         hospitalRepo.save(hospital);
-        return hospital;
+        return hospitalModel;
     }
 
     @Override

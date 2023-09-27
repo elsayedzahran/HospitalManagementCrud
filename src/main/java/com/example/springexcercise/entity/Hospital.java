@@ -20,11 +20,5 @@ public class Hospital {
 
     @Column(name = "Address")
     private String address;
-    @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Doctor> doctors;
-    @OneToMany(mappedBy = "hospital", fetch = FetchType.LAZY)
-    @JsonIgnore
-    private List<Patient> patients;
 
 }

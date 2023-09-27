@@ -15,20 +15,20 @@ public class HospitalController {
     HospitalService hospitalService;
 
     @GetMapping()
-    public List<Hospital> getAll(){
+    public List<HospitalModel> getAll(){
         return hospitalService.getAllHospitals();
     }
     @GetMapping("{id}")
-    public Hospital getHospitalById(@PathVariable int id){
+    public HospitalModel getHospitalById(@PathVariable int id){
         return hospitalService.getHospitalById(id);
     }
 
     @PostMapping()
-    public Hospital addHospital(@RequestBody HospitalModel hospitalModel){
+    public HospitalModel addHospital(@RequestBody HospitalModel hospitalModel){
         return hospitalService.addHospital(hospitalModel);
     }
     @PutMapping("{id}")
-    public Hospital updateHospital(@PathVariable int id,@RequestBody HospitalModel hospitalModel){
+    public HospitalModel updateHospital(@PathVariable int id,@RequestBody HospitalModel hospitalModel){
         return hospitalService.updateHospital(id, hospitalModel);
     }
     @DeleteMapping("{id}")

@@ -13,7 +13,5 @@ import java.util.List;
 public class DoctorModel {
     private int id;
     private String name;
-    private Hospital hospital;
-    private int HospitalID;
-    private List<Patient> patients;
+    private int hospitalId;
 }

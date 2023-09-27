@@ -1,7 +1,6 @@
 package com.example.springexcercise.service;
 
 
-import com.example.springexcercise.entity.Drug;
 import com.example.springexcercise.entity.Hospital;
 import com.example.springexcercise.model.HospitalModel;
 import com.example.springexcercise.repository.HospitalRepo;
@@ -46,7 +45,7 @@ class HospitalServiceTest {
         when(hospitalRepo.findAll()).thenReturn(hospitals);
 
         // when
-        List<Hospital> hospitalModels = hospitalService.getAllHospitals();
+        List<HospitalModel> hospitalModels = hospitalService.getAllHospitals();
         // then
         assertThat(hospitalModels.size()).isEqualTo(3);
     }
@@ -55,14 +54,15 @@ class HospitalServiceTest {
         // given
         int hospitalId = 1;
         Hospital hospital = new Hospital();
+        HospitalModel hospitalModel = new HospitalModel();
         when(hospitalRepo.findById(hospitalId)).thenReturn(Optional.of(hospital));
-
+        when(hospitalMapper.toModel(hospital)).thenReturn(hospitalModel);
         // when
-        Hospital result = hospitalService.getHospitalById(1);
+        HospitalModel result = hospitalService.getHospitalById(1);
 
         // then
         assertThat(result).isNotNull();
-        assertThat(result).isEqualTo(hospital);
+        assertThat(result).isEqualTo(hospitalModel);
     }
     @Test
     void addHospitalTest(){
@@ -79,7 +79,7 @@ class HospitalServiceTest {
         when(hospitalRepo.save(hospital)).thenReturn(hospital);
 
         // when
-        Hospital result = hospitalService.addHospital(hospitalModel);
+        HospitalModel result = hospitalService.addHospital(hospitalModel);
 
         // then
         assertThat(result.getName()).isEqualTo("my hospital");
@@ -96,17 +96,18 @@ class HospitalServiceTest {
         existingHospital.setId(hospitalId);
         existingHospital.setName("Original Name");
         existingHospital.setAddress("Original Address");
+
         when(hospitalRepo.findById(hospitalId)).thenReturn(Optional.of(existingHospital));
 
         // When
-        Hospital updatedHospital = hospitalService.updateHospital(hospitalId, hospitalModel);
+        HospitalModel updatedHospital = hospitalService.updateHospital(hospitalId, hospitalModel);
 
         // Then
         verify(hospitalRepo).findById(hospitalId);
         verify(hospitalRepo).save(existingHospital);
         assertThat(updatedHospital)
                 .isNotNull()
-                .extracting(Hospital::getName, Hospital::getAddress)
+                .extracting(HospitalModel::getName, HospitalModel::getAddress)
                 .containsExactly(hospitalModel.getName(), hospitalModel.getAddress());
     }
 

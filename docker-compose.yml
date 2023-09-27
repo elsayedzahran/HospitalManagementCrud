@@ -11,13 +11,16 @@ services:
     depends_on:
       - db
     environment:
-      - spring.datasource.url=jdbc:mysql://localhost:3306/Hospital
-      - spring.datasource.username=root
-      - spring.datasource.password=Pa$$w0rd
-      - spring.jpa.hibernate.ddl-auto=update
+      - SPRING_DATASOURCE_URL=jdbc:mysql://db:5432/Hospital
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=Pa$$w0rd
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
 
   db:
-    image: 'mysql'
-    container_name: db
+    image: mysql
+    command: --default-authentication-plugin=mysql_native_password
+    restart: always
     environment:
-      - MYSQL_ROOT_PASSWORD=Pa$$w0rd
+      MYSQL_ROOT_USER: root
+      MYSQL_ROOT_PASSWORD: Pa$$w0rd
+      MYSQL_DATABASE: Hospital

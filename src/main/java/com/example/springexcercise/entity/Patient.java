@@ -1,14 +1,22 @@
 package com.example.springexcercise.entity;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "Patient")
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Patient {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,18 +29,17 @@ public class Patient {
 
     @ManyToOne
     @JoinColumn(name = "HospitalID", referencedColumnName = "id")
-    @JsonIgnore
     private Hospital hospital;
 
     @ManyToOne
     @JoinColumn(name = "DoctorID", referencedColumnName = "id")
-    @JsonIgnore
     private Doctor doctor;
 
-    @ManyToMany
-    @JoinTable(name = "DrugPatient",
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "drugpatient",
             joinColumns = @JoinColumn(name = "PatientID", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(name = "DrugID", referencedColumnName = "id"))
-    @JsonIgnore
-    private List<Drug> drugs;
+    @JsonIgnoreProperties({"patients"})
+    @JsonManagedReference
+    private Set<Drug> drugs ;
 }

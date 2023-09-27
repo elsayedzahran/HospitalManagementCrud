@@ -15,12 +15,11 @@ public class Doctor {
     private int id;
     @Column(name = "Name")
     private String name;
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "HospitalID", referencedColumnName = "id")
     private Hospital hospital;
-    @OneToMany(mappedBy = "doctor")
-    @JsonIgnore
-    private List<Patient> patients;
+//    @OneToMany(mappedBy = "doctor")
+//    @JsonIgnore
+//    private List<Patient> patients;
 
 }

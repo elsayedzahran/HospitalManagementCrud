@@ -2,8 +2,12 @@ package com.example.springexcercise.service.servicesimpl;
 
 
 
+import com.example.springexcercise.entity.Doctor;
+import com.example.springexcercise.entity.Hospital;
 import com.example.springexcercise.entity.Patient;
 import com.example.springexcercise.model.PatientModel;
+import com.example.springexcercise.repository.DoctorRepo;
+import com.example.springexcercise.repository.HospitalRepo;
 import com.example.springexcercise.repository.PatientRepo;
 import com.example.springexcercise.service.mappers.PatientMapper;
 import com.example.springexcercise.service.services.PatientService;
@@ -21,7 +25,10 @@ public class PatientServiceImpl implements PatientService {
     PatientMapper patientMapper;
     @Autowired
     PatientRepo patientRepo;
-
+    @Autowired
+    HospitalRepo hospitalRepo;
+    @Autowired
+    DoctorRepo doctorRepo;
 
     @Override
     public List<Patient> getAllPatients() {
@@ -35,7 +42,13 @@ public class PatientServiceImpl implements PatientService {
 
     @Override
     public Patient addPatient(PatientModel patientModel) {
-        Patient patient = patientMapper.toEntity(patientModel);
+        Patient patient =new Patient();
+        patient.setName(patientModel.getName());
+        patient.setGender(patient.getGender());
+        Doctor doctor = doctorRepo.findById(patientModel.getDoctorID()).orElseThrow();
+        Hospital hospital = hospitalRepo.findById(patientModel.getHospitalID()).orElseThrow();
+        patient.setDoctor(doctor);
+        patient.setHospital(hospital);
         patientRepo.save(patient);
         return patient;
     }

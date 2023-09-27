@@ -17,20 +17,19 @@ public class DoctorController {
     DoctorService doctorService;
 
     @GetMapping()
-    public List<Doctor> getAll(){
+    public List<DoctorModel> getAll(){
         return doctorService.getAllDoctors();
     }
     @GetMapping("{id}")
-    public Doctor getDoctorById(@PathVariable int id){
+    public DoctorModel getDoctorById(@PathVariable int id){
         return doctorService.getDoctorById(id);
     }
-
     @PostMapping()
-    public Doctor addDoctor(@RequestBody DoctorModel doctorModel){
+    public DoctorModel addDoctor(@RequestBody DoctorModel doctorModel){
         return doctorService.addDoctor(doctorModel);
     }
     @PutMapping("{id}")
-    public Doctor updateDoctor(@PathVariable int id ,@RequestBody DoctorModel doctorModel){
+    public DoctorModel updateDoctor(@PathVariable int id ,@RequestBody DoctorModel doctorModel){
         return doctorService.updateDoctor(id, doctorModel);
     }
     @DeleteMapping("{id}")

@@ -1,17 +1,18 @@
 package com.example.springexcercise.model;
 
-import com.example.springexcercise.entity.Hospital;
-import com.example.springexcercise.entity.Patient;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import lombok.AllArgsConstructor;
 import lombok.Data;
-
-import java.util.List;
-
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
+@AllArgsConstructor
+@NoArgsConstructor
 public class DoctorModel {
-    private int id;
+    @NonNull
     private String name;
+    @NonNull
     private int hospitalId;
 }

@@ -41,5 +41,5 @@ public class Patient {
             inverseJoinColumns = @JoinColumn(name = "DrugID", referencedColumnName = "id"))
     @JsonIgnoreProperties({"patients"})
     @JsonManagedReference
-    private Set<Drug> drugs ;
+    private Set<Drug> drugs;
 }

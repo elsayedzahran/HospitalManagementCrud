@@ -40,6 +40,7 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public DoctorModel updateDoctor(int id, DoctorModel doctorModel) {
         Doctor doctor = doctorRepo.findById(id).orElseThrow();
+        doctor.setName(doctorModel.getName());
         doctorRepo.save(doctor);
         return doctorModel;
     }

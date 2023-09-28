@@ -3,6 +3,7 @@ package com.example.springexcercise.rest;
 import com.example.springexcercise.entity.Patient;
 import com.example.springexcercise.model.HospitalModel;
 import com.example.springexcercise.model.PatientModel;
+import com.example.springexcercise.model.PatientToPrintModel;
 import com.example.springexcercise.service.services.HospitalService;
 import com.example.springexcercise.service.services.PatientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,20 +18,20 @@ public class PatientController {
     PatientService patientService;
 
     @GetMapping()
-    public List<Patient> getAll(){
+    public List<PatientToPrintModel> getAll(){
         return patientService.getAllPatients();
     }
     @GetMapping("{id}")
-    public Patient getPatientById(@PathVariable int id){
+    public PatientToPrintModel getPatientById(@PathVariable int id){
         return patientService.getPatientById(id);
     }
 
     @PostMapping()
-    public Patient addPatient(@RequestBody PatientModel patientModel){
+    public PatientToPrintModel addPatient(@RequestBody PatientModel patientModel){
         return patientService.addPatient(patientModel);
     }
-    @PutMapping()
-    public Patient updatePatient(@PathVariable int id, @RequestBody PatientModel patientModel){
+    @PutMapping("{id}")
+    public PatientToPrintModel updatePatient(@PathVariable int id, @RequestBody PatientModel patientModel){
         return patientService.updatePatient(id, patientModel);
     }
     @DeleteMapping("{id}")

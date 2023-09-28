@@ -1,26 +1,23 @@
-version: '2'
+version: '3'
 
 services:
-  app:
+  springboot-app:
+    container_name: 'app'
     image: 'docker-spring-boot-mysql:latest'
-    build:
-      context: .
-    container_name: app
+    build: .
     ports:
       - '8080:8080'
-    depends_on:
-      - db
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:mysql://db:5432/Hospital
-      - SPRING_DATASOURCE_USERNAME=root
-      - SPRING_DATASOURCE_PASSWORD=Pa$$w0rd
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-
+      MYSQL_HOST: db
+      MYSQL_USER: root
+      MYSQL_PASSWORD: Pa$$w0rd
+      MYSQL_PORT: 3305
   db:
+    container_name: db
     image: mysql
-    command: --default-authentication-plugin=mysql_native_password
-    restart: always
+    ports:
+      - 3305:3306
     environment:
-      MYSQL_ROOT_USER: root
-      MYSQL_ROOT_PASSWORD: Pa$$w0rd
       MYSQL_DATABASE: Hospital
+      MYSQL_ROOT_PASSWORD: Pa$$w0rd
+

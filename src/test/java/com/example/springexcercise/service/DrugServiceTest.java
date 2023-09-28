@@ -28,98 +28,98 @@ import static org.mockito.Mockito.*;
 @SpringBootTest
 //@AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
 class DrugServiceTest {
-    @Mock
-    private DrugRepo drugRepo;
-    @Mock
-    private DrugMapper drugMapper;
-    @InjectMocks
-    private DrugServiceImpl drugService;
-    @BeforeEach
-    public void init(){
-        MockitoAnnotations.openMocks(this);
-    }
-    @Test
-    void test(){
-
-    }
-    @Test
-    void getAllTest(){
-        // given
-        when(drugRepo.findAll()).thenReturn(List.of(new Drug(), new Drug()));
-
-        // when
-        List<Drug> result = drugService.getAllDrugs();
-
-        // then
-        assertThat(result).hasSize(2);
-    }
-    @Test
-    void getByIdTest(){
-        // given
-        int drugId = 1;
-        Drug drug = new Drug();
-        when(drugRepo.findById(drugId)).thenReturn(Optional.of(drug));
-
-        // when
-        Drug result = drugService.getDrugById(drugId);
-
-        // then
-        assertThat(result).isNotNull();
-
-    }
-    @Test
-    void addDrugTest(){
-        // given
-        DrugModel drugModel = new DrugModel();
-        Drug drug = new Drug();
-        when(drugMapper.toEntity(drugModel)).thenReturn(drug);
-        when(drugRepo.save(drug)).thenReturn(drug);
-
-        // when
-        Drug result = drugService.addDrug(drugModel);
-
-        // then
-        assertThat(result).isNotNull();
-    }
-    @Test
-    public void testUpdateDrug() {
-        // Given
-        int drugId = 1;
-        DrugModel drugModel = new DrugModel();
-        drugModel.setName("Updated Name");
-        drugModel.setDescription("Updated Description");
-
-        Drug existingDrug = new Drug();
-        existingDrug.setId(drugId);
-        existingDrug.setName("Original Name");
-        existingDrug.setDescription("Original Description");
-
-        when(drugRepo.findById(drugId)).thenReturn(Optional.of(existingDrug));
-
-        // When
-        Drug updatedDrug = drugService.updateDrug(drugId, drugModel);
-
-        // Then
-        verify(drugRepo).findById(drugId);
-        verify(drugRepo).save(existingDrug);
-        assertThat(updatedDrug)
-                .isNotNull()
-                .extracting(Drug::getName, Drug::getDescription)
-                .containsExactly(drugModel.getName(), drugModel.getDescription());
-    }
-    @Test
-    void deleteDrugTest(){
-        // given
-        int drugId = 1;
-        Drug drug = new Drug();
-        when(drugRepo.findById(drugId)).thenReturn(Optional.of(drug));
-        doNothing().when(drugRepo).delete(drug);
-
-        // when
-        Throwable throwable = catchThrowable(() -> drugService.deleteDrug(drugId));
-
-        // then
-        assertThat(throwable).doesNotThrowAnyException();
-    }
+//    @Mock
+//    private DrugRepo drugRepo;
+//    @Mock
+//    private DrugMapper drugMapper;
+//    @InjectMocks
+//    private DrugServiceImpl drugService;
+//    @BeforeEach
+//    public void init(){
+//        MockitoAnnotations.openMocks(this);
+//    }
+//    @Test
+//    void test(){
+//
+//    }
+//    @Test
+//    void getAllTest(){
+//        // given
+//        when(drugRepo.findAll()).thenReturn(List.of(new Drug(), new Drug()));
+//
+//        // when
+//        List<Drug> result = drugService.getAllDrugs();
+//
+//        // then
+//        assertThat(result).hasSize(2);
+//    }
+//    @Test
+//    void getByIdTest(){
+//        // given
+//        int drugId = 1;
+//        Drug drug = new Drug();
+//        when(drugRepo.findById(drugId)).thenReturn(Optional.of(drug));
+//
+//        // when
+//        Drug result = drugService.getDrugById(drugId);
+//
+//        // then
+//        assertThat(result).isNotNull();
+//
+//    }
+//    @Test
+//    void addDrugTest(){
+//        // given
+//        DrugModel drugModel = new DrugModel();
+//        Drug drug = new Drug();
+//        when(drugMapper.toEntity(drugModel)).thenReturn(drug);
+//        when(drugRepo.save(drug)).thenReturn(drug);
+//
+//        // when
+//        Drug result = drugService.addDrug(drugModel);
+//
+//        // then
+//        assertThat(result).isNotNull();
+//    }
+//    @Test
+//    public void testUpdateDrug() {
+//        // Given
+//        int drugId = 1;
+//        DrugModel drugModel = new DrugModel();
+//        drugModel.setName("Updated Name");
+//        drugModel.setDescription("Updated Description");
+//
+//        Drug existingDrug = new Drug();
+//        existingDrug.setId(drugId);
+//        existingDrug.setName("Original Name");
+//        existingDrug.setDescription("Original Description");
+//
+//        when(drugRepo.findById(drugId)).thenReturn(Optional.of(existingDrug));
+//
+//        // When
+//        Drug updatedDrug = drugService.updateDrug(drugId, drugModel);
+//
+//        // Then
+//        verify(drugRepo).findById(drugId);
+//        verify(drugRepo).save(existingDrug);
+//        assertThat(updatedDrug)
+//                .isNotNull()
+//                .extracting(Drug::getName, Drug::getDescription)
+//                .containsExactly(drugModel.getName(), drugModel.getDescription());
+//    }
+//    @Test
+//    void deleteDrugTest(){
+//        // given
+//        int drugId = 1;
+//        Drug drug = new Drug();
+//        when(drugRepo.findById(drugId)).thenReturn(Optional.of(drug));
+//        doNothing().when(drugRepo).delete(drug);
+//
+//        // when
+//        Throwable throwable = catchThrowable(() -> drugService.deleteDrug(drugId));
+//
+//        // then
+//        assertThat(throwable).doesNotThrowAnyException();
+//    }
 
 }

@@ -28,29 +28,32 @@ public class DrugServiceImpl implements DrugService {
     @Autowired
     DrugRepo drugRepo;
     @Override
-    public List<Drug> getAllDrugs() {
-        return drugRepo.findAll();
+    public List<DrugModel> getAllDrugs() {
+        return drugRepo.findAll()
+                .stream()
+                .map(drug -> drugMapper.toModel(drug))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Drug getDrugById(int id) {
-        return drugRepo.findById(id).orElseThrow();
+    public DrugModel getDrugById(int id) {
+        return drugMapper.toModel(drugRepo.findById(id).orElseThrow());
     }
 
     @Override
-    public Drug addDrug(DrugModel drugModel) {
+    public DrugModel addDrug(DrugModel drugModel) {
         Drug drug = drugMapper.toEntity(drugModel);
         drugRepo.save(drug);
-        return drug;
+        return drugModel;
     }
 
     @Override
-    public Drug updateDrug(int id, DrugModel drugModel) {
+    public DrugModel updateDrug(int id, DrugModel drugModel) {
         Drug drug = drugRepo.findById(id).orElseThrow();
         drug.setName(drugModel.getName());
         drug.setDescription(drugModel.getDescription());
         drugRepo.save(drug);
-        return drug;
+        return drugModel;
     }
 
     @Override

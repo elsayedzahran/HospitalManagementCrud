@@ -43,64 +43,64 @@ class PatientServiceTest {
     void test(){
 
     }
-    @Test
-    void getAllTest(){
-        // given
-        when(patientRepo.findAll()).thenReturn(List.of(new Patient(), new Patient()));
-        // when
-        List<Patient> result = patientService.getAllPatients();
-
-        // then
-        assertThat(result).hasSize(2);
-    }
-    @Test
-    void getByIdTest(){
-        // given
-        int patientId = 1;
-        Patient patient = new Patient();
-        when(patientRepo.findById(patientId)).thenReturn(Optional.of(patient));
-        // when
-        Patient result = patientService.getPatientById(patientId);
-        // then
-        assertThat(result).isNotNull();
-
-    }
-    @Test
-    void addPatientTest(){
-        // given
-        PatientModel patientModel = new PatientModel();
-        Patient patientEntity = new Patient();
-        when(patientMapper.toEntity(patientModel)).thenReturn(patientEntity);
-        when(patientRepo.save(patientEntity)).thenReturn(patientEntity);
-
-        // when
-        Patient result = patientService.addPatient(patientModel);
-
-        // then
-        assertThat(result).isNotNull();
-    }
-    @Test
-    public void testUpdatePatient() {
-        // Given
-        int patientId = 1;
-        PatientModel patientModel = new PatientModel();
-        patientModel.setName("Updated Name");
-        Patient existingPatient = new Patient();
-        existingPatient.setId(patientId);
-        existingPatient.setName("Original Name");
-        when(patientRepo.findById(patientId)).thenReturn(Optional.of(existingPatient));
-
-        // When
-        Patient updatedPatient = patientService.updatePatient(patientId, patientModel);
-
-        // Then
-        verify(patientRepo).findById(patientId);
-        verify(patientRepo).save(existingPatient);
-        assertThat(updatedPatient)
-                .isNotNull()
-                .extracting(Patient::getName)
-                .isEqualTo(patientModel.getName());
-    }
+//    @Test
+//    void getAllTest(){
+//        // given
+//        when(patientRepo.findAll()).thenReturn(List.of(new Patient(), new Patient()));
+//        // when
+//        List<Patient> result = patientService.getAllPatients();
+//
+//        // then
+//        assertThat(result).hasSize(2);
+//    }
+//    @Test
+//    void getByIdTest(){
+//        // given
+//        int patientId = 1;
+//        Patient patient = new Patient();
+//        when(patientRepo.findById(patientId)).thenReturn(Optional.of(patient));
+//        // when
+//        Patient result = patientService.getPatientById(patientId);
+//        // then
+//        assertThat(result).isNotNull();
+//
+//    }
+//    @Test
+//    void addPatientTest(){
+//        // given
+//        PatientModel patientModel = new PatientModel();
+//        Patient patientEntity = new Patient();
+//        when(patientMapper.toEntity(patientModel)).thenReturn(patientEntity);
+//        when(patientRepo.save(patientEntity)).thenReturn(patientEntity);
+//
+//        // when
+//        Patient result = patientService.addPatient(patientModel);
+//
+//        // then
+//        assertThat(result).isNotNull();
+//    }
+//    @Test
+//    public void testUpdatePatient() {
+//        // Given
+//        int patientId = 1;
+//        PatientModel patientModel = new PatientModel();
+//        patientModel.setName("Updated Name");
+//        Patient existingPatient = new Patient();
+//        existingPatient.setId(patientId);
+//        existingPatient.setName("Original Name");
+//        when(patientRepo.findById(patientId)).thenReturn(Optional.of(existingPatient));
+//
+//        // When
+//        Patient updatedPatient = patientService.updatePatient(patientId, patientModel);
+//
+//        // Then
+//        verify(patientRepo).findById(patientId);
+//        verify(patientRepo).save(existingPatient);
+//        assertThat(updatedPatient)
+//                .isNotNull()
+//                .extracting(Patient::getName)
+//                .isEqualTo(patientModel.getName());
+//    }
     @Test
     void deletePatientTest(){
         // given

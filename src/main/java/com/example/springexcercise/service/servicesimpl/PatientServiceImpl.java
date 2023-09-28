@@ -6,6 +6,7 @@ import com.example.springexcercise.entity.Doctor;
 import com.example.springexcercise.entity.Hospital;
 import com.example.springexcercise.entity.Patient;
 import com.example.springexcercise.model.PatientModel;
+import com.example.springexcercise.model.PatientToPrintModel;
 import com.example.springexcercise.repository.DoctorRepo;
 import com.example.springexcercise.repository.HospitalRepo;
 import com.example.springexcercise.repository.PatientRepo;
@@ -31,37 +32,36 @@ public class PatientServiceImpl implements PatientService {
     DoctorRepo doctorRepo;
 
     @Override
-    public List<Patient> getAllPatients() {
-        return patientRepo.findAll();
+    public List<PatientToPrintModel> getAllPatients() {
+        return patientRepo.findAll()
+                .stream()
+                .map(patient -> patientMapper.entityToPrintModel(patient))
+                .collect(Collectors.toList());
     }
 
     @Override
-    public Patient getPatientById(int id) {
-        return patientRepo.findById(id).orElseThrow();
+    public PatientToPrintModel getPatientById(int id) {
+        return patientMapper.entityToPrintModel(patientRepo.findById(id).orElseThrow());
     }
-
     @Override
-    public Patient addPatient(PatientModel patientModel) {
-        Patient patient =new Patient();
-        patient.setName(patientModel.getName());
-        patient.setGender(patient.getGender());
-        Doctor doctor = doctorRepo.findById(patientModel.getDoctorID()).orElseThrow();
-        Hospital hospital = hospitalRepo.findById(patientModel.getHospitalID()).orElseThrow();
-        patient.setDoctor(doctor);
-        patient.setHospital(hospital);
+    public PatientToPrintModel addPatient(PatientModel patientModel) {
+        Patient patient = patientMapper.toEntity(patientModel);
         patientRepo.save(patient);
-        return patient;
+        return patientMapper.entityToPrintModel(patient);
     }
-
     @Override
-    public Patient updatePatient(int id, PatientModel patientModel) {
+    public PatientToPrintModel updatePatient(int id, PatientModel patientModel) {
         Patient patient = patientRepo.findById(id).orElseThrow();
-        patient.setName(patientModel.getName());
-        patient.setGender(patient.getGender());
-        patientRepo.save(patient);
-        return patient;
-    }
+        Patient patientUpdate = patientMapper.toEntity(patientModel);
 
+        patient.setName(patientUpdate.getName());
+        patient.setGender(patientUpdate.getGender());
+        patient.setHospital(patientUpdate.getHospital());
+        patient.setDoctor(patientUpdate.getDoctor());
+
+        patientRepo.save(patient);
+        return patientMapper.entityToPrintModel(patient);
+    }
     @Override
     public void deletePatient(int id) {
         Patient patient = patientRepo.findById(id).orElseThrow();

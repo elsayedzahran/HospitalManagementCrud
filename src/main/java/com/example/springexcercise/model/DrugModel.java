@@ -6,13 +6,14 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
+import java.util.Set;
 
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class DrugModel {
-    private int id;
     private String name;
     private String description;
-    private List<Patient> patients;
+    @JsonIgnoreProperties({"drugs"})
+    private Set<Patient> patients;
 }

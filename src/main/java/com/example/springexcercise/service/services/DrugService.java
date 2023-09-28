@@ -7,9 +7,9 @@ import com.example.springexcercise.model.DrugModel;
 import java.util.List;
 
 public interface DrugService {
-    List<Drug> getAllDrugs();
-    Drug getDrugById(int id);
-    Drug addDrug(DrugModel drugModel);
-    Drug updateDrug(int id,DrugModel drugModel);
+    List<DrugModel> getAllDrugs();
+    DrugModel getDrugById(int id);
+    DrugModel addDrug(DrugModel drugModel);
+    DrugModel updateDrug(int id,DrugModel drugModel);
     void deleteDrug(int id);
 }

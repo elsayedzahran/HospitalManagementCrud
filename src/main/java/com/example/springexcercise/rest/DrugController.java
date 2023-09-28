@@ -17,20 +17,20 @@ public class DrugController {
     DrugService drugService;
 
     @GetMapping()
-    public List<Drug> getAll(){
+    public List<DrugModel> getAll(){
         return drugService.getAllDrugs();
     }
     @GetMapping("{id}")
-    public Drug getDrugById(@PathVariable int id){
+    public DrugModel getDrugById(@PathVariable int id){
         return drugService.getDrugById(id);
     }
 
     @PostMapping()
-    public Drug addDrug(@RequestBody DrugModel drugModel){
+    public DrugModel addDrug(@RequestBody DrugModel drugModel){
         return drugService.addDrug(drugModel);
     }
     @PutMapping("{id}")
-    public Drug updateDrug(@PathVariable int id,@RequestBody DrugModel drugModel){
+    public DrugModel updateDrug(@PathVariable int id,@RequestBody DrugModel drugModel){
         return drugService.updateDrug(id, drugModel);
     }
     @DeleteMapping("{id}")
